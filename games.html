@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Custom Stylesheet -->
+        <link rel="stylesheet" href="static/games_stylesheet.css">
+
+        <!-- Hover Dropdown Menus -->
+        <style>
+            @media all and (min-width: 992px) {
+                .navbar .nav-item .dropdown-menu{ display: none; }
+                .navbar .nav-item:hover .nav-link{ color: #fff;  }
+                .navbar .nav-item:hover .dropdown-menu{ display: block; }
+                .navbar .nav-item .dropdown-menu{ margin-top:0; }
+            }
+        </style>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/android-chrome-512x512.png">
+
+        <title>David Chu - Games</title>
+    </head>
+  
+
+    <body>
+        <!-- Top Navigation Bar -->
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+            <!-- Navigation Bar on the Left -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html#Home">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="index.html#About" data-toggle="dropdown">About</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item font-weight-bold" href="index.html#About">About Me</a>
+                        <a class="dropdown-item" href="index.html#Education">Education</a>
+                        <a class="dropdown-item" href="index.html#Professional">Professional Experience</a>
+                        <a class="dropdown-item" href="index.html#Hobbies">Hobbies</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="index.html#Portfolio" data-toggle="dropdown">Portfolio</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item font-weight-bold" href="#Portfolio">Portfolio</a>
+                        <a class="dropdown-item" href="index.html#Coding">Coding</a>
+                        <a class="dropdown-item" href="index.html#Music">Music</a>
+                        <a class="dropdown-item" href="index.html#Other">Other</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html#Contact">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Navigation Bar on the Right -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="col" href="https://www.linkedin.com/in/thedavidchu/" target="_blank">LinkedIn</a>
+                </li>
+                <li>
+                    <a class="col" href="https://github.com/thedavidchu/" target="_blank">GitHub</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Name Title -->
+        <div id="Home" class="jumbotron fluid-container text-center">
+            <br><br>
+            <h1>Games</h1>
+        </div>
+
+         <div id="Chess" class="container">
+            <hr>
+            <h2 class="text-center">Chess</h2>
+            <p>Welcome to my Chess Game!</p>
+
+            <h3>Instructions</h3>
+            <ol>
+                <li><b>Human player: </b>Click the piece you wish to select and click where you wish to move it.</li>
+                <li><b>AI player: </b>Click a the button saying how many layers you would like it to search!</li>
+            </ol>
+
+            <button id="mobile" type="button" class="btn btn-secondary row justify-content-center" onclick="$('.table').toggleClass('table-responsive')">Mobile Device</button>
+
+            <hr>
+            <div class="row justify-content-center">
+	            <table class= "table table-bordered chess-board">
+	                <thead></thead>
+	                <tbody id="chess_board"></tbody>
+	            </table>
+        	</div>
+
+
+            <script src="js/chess/ChessBoard.js"></script>
+            <script>
+                let board = new ChessBoard(null);
+                board.setup_board("chess_board");
+            </script>
+
+            <!-- Alpha-beta pruning -->
+            
+            <b class="container">Alpha-Beta Pruned Chess AI</b>
+            <div class="container btn-group">
+                
+                <button id="play_game1" type="button" class="btn btn-dark" onclick="board.play_game(1);">1 Layer</button>
+                <button id="play_game2" type="button" class="btn btn-primary" onclick="board.play_game(2);">2 Layers</button>
+                <button id="play_game3" type="button" class="btn btn-success" onclick="board.play_game(3);">3 Layers</button>
+                <button id="play_game4" type="button" class="btn btn-warning" onclick="board.play_game(4);">4 Layers</button>
+                <button id="play_game5" type="button" class="btn btn-danger" onclick="board.play_game(5);">5 Layers</button>
+            </div><hr>
+            
+
+            <div class="container">
+                <h3>Behaviour and Analysis</h3>
+                <p><b>Performance: </b>I believe the 4-layer-deep AI may have an ELO rating of at least 600, since I beat a chess.com AI with an ELO of 600 pretty easily in a one-out-of-one series. In other words, I tested it on one game against a chess AI with an ELO of 600.</p>
+
+                <p><b>Opening: </b>The AI makes a weird opening when it looks 1-4 layers deep, where it advances the knight first. This is simply because this position evaluates the highest. The 5 layer deep AI advances the king's pawn first (which is how I open as well).</p>
+
+                <p><b>Time: </b>Since the AI looks a given number of layers forward for each move, expect the AI to take longer calculate its next move in the middle of a game, when there are the most possible options. Expect the opening and endgame to be quicker. </p>
+
+                <p><b>Even vs. Odd Layers: </b>The AI may be more aggressive when searching an odd number of layers deep (i.e. 1, 3, or 5). This is because it does not register that the opponent will play a counter move. The AI will also sometimes get stuck alternating between moves.</p>
+
+                <p><b>Endgame: </b>The AI only looks a given number of moves ahead and it is also looking to capture the King, rather than checkmate. This means that it does not try to force a mate, rather it tries to prolong the game and capture as many enemy pieces as possible. I figure that this is not harmful enough to warrant a fix, since it is just prolonging the game until its opponents inevitable demise. Ask a real chess expert what they think about this though. The AI is unable to come up with a coherent strategy to checkmate because it never looks deep enough to explore a mate. I think the end game is different enough that it would warrant a separate engine. Either that, or I could hard-code endgame tables. Not my idea of fun, unfortunately. I could do iterative deepening though!</p>
+            </div>
+
+            <div class="container">
+                <h3>Warnings</h3>
+                    <p><b>Bugs: </b>There may be bugs. If you are trying to discretely win a chess tournament, please do not use this engine unless you want to risk losing. If you find a bug, please let me know!</p>
+                    <p><b>Determinism: </b>The AI is not necessarily deterministic. I have added randomness to it; however you can switch this randomness off (in the source code itself).</p>
+                    <p><b>Colours: </b>The colour palette doesn't quite sit right. I tried to go with pastel colours, but I have no training in UI design, so if you have any tips, please share them!</p>
+                    <p><b>Recording the Game: </b>The game is not recorded, so it is difficult to take back a move (push F12 and manually edit the board and the turn).</p>
+                    <p><b>Lesser Known Rules: </b>Neither AI nor my board have the concept of a 3-repeated-move draw nor the 50 moves without capture/ pawn move draw. So if you are looking to force a draw like this, you can't! I also have not implemented other obscure chess rules (likely because I am unaware of them).</p>
+                </ul>
+            </div>
+
+            <hr>
+            
+        </div>
+
+
+        <!-- ============================== JAVASCRIPT CODE ============================== -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <!-- ============================== MY CODE ============================== -->
+        <!-- Change title -->
+        <script src="js/change_title.js"></script>
+    </body>
+</html>
+
+
+<!-- ============================== CODE TO LOAD AT THE END ============================== -->
+
+
+<script>
+    /**
+    Note: this only allows for 1 board.
+    */
+
+
+    function get_id(hic) {
+        /**
+        Toggles between chess id "#i-chess" and board number.
+
+        $(this)/ "#i-chess" -> numeric id
+        numeric id -> "#i-chess"
+        */
+
+        switch (typeof(hic)) {
+            case "number":
+                return "#"+hic+"-chess";
+            case "string":
+                if (hic[0] == "#") {return parseInt(hic.slice(1));}
+                else {return parseInt(hic);}
+            default:
+                let id = hic.attr("id");
+                return parseInt(id);
+        }
+    }
+
+
+    function check_turn(hic, board) {
+        /**
+        Check if the piece in question belongs to the player whose turn it is.
+
+        :param hic: $(this) - square in question
+        :return: bool - whether it is that player's turn.
+        */
+
+        let i = parseInt(hic.attr('id'));
+
+        return board.turn == Math.sign(board.board[i]);
+    }
+
+
+    function highlight_legal(hic, board) {
+        /**
+        Get legal moves of this piece, regardless of whether it is this piece's turn.
+
+        N.B. Special highlight for attacked pieces.
+
+        :param hic: (hic, haec, hoc)
+        :return: array of id's
+        */
+
+        let id = parseInt(hic.attr("id"));
+        let legal = board.get_legal_moves(id);
+
+        function is_en_passant(piece, start, finish, board) {
+            /**
+            If it is a pawn move diagonally, it is a capture no matter what.
+            */
+            let move = Math.abs(finish - start);
+
+            if (Math.abs(piece) == 10 && (move == 7 || move == 9)) {return true;}
+            else {return false;}
+        }
+
+        for (let i of legal) {
+            if (Math.sign(board.board[i]) == -Math.sign(board.board[id]) || is_en_passant(board.board[id], id, i, board)) {
+                $("#"+i+"-chess").addClass("chess-legal chess-attacked");
+            } else {
+                $("#"+i+"-chess").addClass("chess-legal");
+            }
+        }
+        return;
+    }
+
+
+    function remove_selection() {
+        /**
+        Removes selected piece.
+        */
+
+        $("td").removeClass("chess-active chess-legal chess-attacked");
+        return;
+    }
+
+
+    $(document).ready(function() {
+        // Hover on chess board
+        $("td").hover(function() {
+            /**
+            Hover over chess board.
+
+            Behaviour:
+                1. Hover over piece that can move: highlight table-info
+                2. Hover over potential move: highlight table-
+                3. Else: highlight table-active
+            */
+
+            let turn = check_turn($(this), board);
+
+            if (turn) {
+                $(this).addClass("chess-active-hover");
+            } else {
+                let class_name = $(this).attr("class");
+
+                if ($(this).hasClass("chess-legal") || $(this).hasClass("chess-attacked")) {
+                    $(this).addClass("chess-legal-hover");
+                } else {
+                    $(this).addClass("chess-passive-hover");
+                } 
+            }
+            return;
+
+        }, function() {
+            $(this).removeClass("chess-passive-hover chess-active-hover chess-legal-hover");
+        });
+
+        // Clicking on chess board
+        $("td").click(function() {
+            /**
+            Update board when it is clicked on.
+            */
+
+            // Click on player piece
+            // If selected, unselect
+            if ($(this).hasClass("chess-active")) {
+                // Unselect options
+                remove_selection();
+            // If not selected, unselect old and select new.
+            } else if ($(this).hasClass("chess-active-hover")) {
+                // Unselect options
+                remove_selection();
+                // Select new
+                $(this).addClass("chess-active");
+                highlight_legal($(this), board);
+            // If legal move, move the piece
+            } else if ($(this).hasClass("chess-legal-hover")) {
+                let a = parseInt($(".chess-active").attr("id"));
+                let b = parseInt($(this).attr("id"));
+                
+                board.get_move(a, b);
+                
+                $("td").removeClass("chess-active chess-legal chess-legal-hover chess-active-hover chess-attacked chess-moved");
+                $(this).addClass("chess-passive-hover");
+
+                // Change board colours
+                $("#" + a + "-chess").addClass("chess-moved");
+                $("#" + b + "-chess").addClass("chess-moved");
+            } else {
+                // Unselect options
+                remove_selection();
+            }
+        });
+    });
+    
+</script>

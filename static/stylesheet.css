@@ -1,0 +1,35 @@
+body {
+	margin-top: 40px;
+}
+
+h3 {
+	margin-top: 20px;
+}
+
+hr.thick-dark {
+	height:4px;
+	border:none;
+	color:#333;
+	background-color:#333;
+}
+
+hr.thin-dark {
+	height:2px;
+	border:none;
+	color:#333;
+	background-color:#333;
+}
+
+hr.thick-light {
+	height:4px;
+	border:none;
+	color:#bbb;
+	background-color:#bbb;
+}
+
+hr.thin-light {
+	height:2px;
+	border:none;
+	color:#bbb;
+	background-color:#bbb;
+}
