@@ -1,5 +1,5 @@
 # thedavidchu.github.io
-Welcome to my personal website!
+Welcome to my [personal website](https://thedavidchu.github.io/)!
 
 ## About
 
