@@ -10,3 +10,8 @@ I started this project on Saturday, June 27, 2020 after being inspired by Matt I
 ## Chess
 
 There is a chess engine that I wrote in JavaScript. There is a lot of CSS that I need to clean up.
+
+## TODO
+* Clean up file structure and rename everything
+* Unit tests?
+* Make a separate folder called "pages" to store HTML stuff
