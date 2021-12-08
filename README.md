@@ -15,3 +15,4 @@ There is a chess engine that I wrote in JavaScript. There is a lot of CSS that I
 * Clean up file structure and rename everything
 * Unit tests?
 * Make a separate folder called "pages" to store HTML stuff
+* Make Python script to generate new template files
